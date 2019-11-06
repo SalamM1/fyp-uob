@@ -27,12 +27,12 @@ Microsoft Research, Conversational Systems Research Center
 
 %% 
 % Step0: Set the parameters of the experiment
-nSpeakers = 20;
-nDims = 13;             % dimensionality of feature vectors
+nSpeakers = 5;
+nDims = 31;             % dimensionality of feature vectors
 nMixtures = 32;         % How many mixtures used to generate data
-nChannels = 10;         % Number of channels (sessions) per speaker
-nFrames = 1000;         % Frames per speaker (10 seconds assuming 100 Hz)
-nWorkers = 1;           % Number of parfor workers, if available
+nChannels = 45;         % Number of channels (sessions) per speaker
+nFrames = 610;         % Frames per speaker (10 seconds assuming 100 Hz)
+nWorkers = 4;           % Number of parfor workers, if available
 
 % Pick random centers for all the mixtures.
 mixtureVariance = .10;
@@ -51,7 +51,7 @@ for s=1:nSpeakers
     for c=1:nChannels
         for m=1:nMixtures
             % Create data from mixture m for speaker s
-            frameIndices = m:nMixtures:nFrames;
+            frameIndices = m:nMixtures:(nFrames + randi([-400 400], 1, 1));
             nMixFrames = length(frameIndices);
             trainSpeechData(:,frameIndices) = ...
                 randn(nDims, nMixFrames)*sqrt(mixtureVariance) + ...
