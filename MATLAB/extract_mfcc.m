@@ -19,7 +19,7 @@ function feature_vector = extract_mfcc(audioIn, fs, segment, window_length, over
 
 %%
 % Do error checking and assignment
-segment = segment*fs;
+segment = fix(segment*fs);
 startTime = segment(1);
 endTime = segment(2);
 if startTime < 1  && (startTime ~= 0) && (endTime ~= 0)
@@ -43,5 +43,5 @@ ft = stft(audioIn, 'Window', win, 'OverlapLength', overlap_length, 'Centered', f
 %%
 % Extract the 40-dimensional MFCC vector
 [mfccs, delta, deltaDelta, loc] = mfcc(ft, fs, "LogEnergy", "Ignore");
-feature_vector = [mfccs, delta, deltaDelta, loc];
+feature_vector = [mfccs, delta, deltaDelta];
 end
