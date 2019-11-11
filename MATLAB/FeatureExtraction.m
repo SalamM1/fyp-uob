@@ -1,51 +1,71 @@
+clear
 addpath('msr_toolbox');
-addpath('data');
-[audioIn, fs] = audioread('data/1B.wav');
-segment = [0; 1];
+load('data/labels.mat');
 % Each speaker has two files/sessions with labels and segments
 % Each file has 2 channels
 % Each speaker has an ID attached to them (1B, 2A 2B, etc.)
 % Each speaker has a different number of labelled segments, varies
 % The segments and labels will be stored in a seperate array
 %
-%% Step 0: Variables and Prepocessing
-nEmotions = 1;
-nSpeakers = 20;
-nWorkers = 12; % for parallel computations
+%% Step 0.1: Read files
+load('data/labels.mat');
 
-%testing
+fid = fopen('data/audioFileNames.txt','rt');
+C = textscan(fid,'%s%d','Delimiter','\t','Whitespace','','Delimiter',',');
+fclose(fid);
+audioFileNames = C{1};
+stereoDim = C{2};
 
+fid = fopen('data/dataFileNames.txt','rt');
+C = textscan(fid,'%s','Delimiter','\t','Whitespace','');
+fclose(fid);
+dataFileNames = C{1};
+%% Step 0.2: Variables and Prepocessing
+nWorkers = 4; % for parallel computations
+nLabels = size(labels, 1);
+nFiles = size(dataFileNames, 1);
+nSegments = 0;
+
+htkFilepath =  'data/htkfiles/';
+addpath(htkFilepath);
 %% Step 1: Feature Extraction
-trainingData = cell(nEmotions, nSpeakers);
-for i=1:nSpeakers %Extracting all from 1 file for test
-    for j=1:nEmotions
-        trainingData{j,i} = cmvn((extract_mfcc(audioIn(:,1), fs, (segment + ((i-1))), 0.05, 0.02))');
+%{
+for i=1:nFiles
+    [audioIn, fs, segments] = read_audio_file(audioFileNames{i}, dataFileNames{i});
+    nSegments = size(segments, 1);
+    for j=1:nSegments
+        feature = (extract_mfcc(audioIn(:,stereoDim(i)), fs, segments(j,:), 0.04, 0.02))';
+        htkwrite(append(htkFilepath, dataFileNames{i}, num2str(j, '%03d')), feature, fs, 9);
     end
 end
+%}
+
 %% Step 2: UBM Model from Training Data
-nmix        = 256;
-final_niter = 10;
+nmix        = 1024;
+final_niter = 15;
 ds_factor   = 1;
-ubm = gmm_em(trainingData(:), nmix, final_niter, ds_factor, nWorkers);
+ubm = gmm_em(labels(1:nLabels,1), nmix, final_niter, ds_factor, nWorkers);
 
 %% Step 3: Total Variability Calculations
-stats = cell(nEmotions, nSpeakers);
-for e=1:nEmotions
-    for s=1:nSpeakers
-        [N,F] = compute_bw_stats(trainingData{e,s}, ubm);
-        stats{e,s} = [N; F];
-    end
+stats = cell(nLabels, 1);
+for i=1:nLabels
+    [N,F] = compute_bw_stats(append(htkFilepath, labels{i, 1}), ubm);
+    stats{i} = [N;F];
 end
 
-tvDim = 100;
+tvDim = 300;
 niter = 5;
-T = train_tv_space(stats(:), ubm, tvDim, niter, nWorkers);
+T = train_tv_space(stats, ubm, tvDim, niter, nWorkers);
 
 %% Step 4: IVector Feature Extraction
 % Obtain development IVectors
-for e=1:nEmotions
-    for s=1:nSpeakers
-        devIVs(:, e, s) = extract_ivector(stats{e, s}, ubm, T);
-    end
+devIVs = zeros(tvDim, nLabels);
+for i=1:nLabels
+    devIVs(:, i) = extract_ivector(stats{i}, ubm, T);
 end
+
+%% Step 5: Perform LDA on IVectors
+ldaDim = min(100, 5);
+[V,D] = lda(devIVs, string(labels(1:nLabels,2)));
+finalDevIVs = (V(:, 1:ldaDim)' * devIVs).*10^7;
 
