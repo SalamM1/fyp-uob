@@ -7,7 +7,8 @@ load('data/labels.mat');
 % Each speaker has a different number of labelled segments, varies
 % The segments and labels will be stored in a seperate array
 %
-%% Step 0.1: Read files
+%% Step 1: Variables and Prepocessing
+% Step 1a : Read files
 load('data/labels.mat');
 
 fid = fopen('data/audioFileNames.txt','rt');
@@ -20,7 +21,7 @@ fid = fopen('data/dataFileNames.txt','rt');
 C = textscan(fid,'%s','Delimiter','\t','Whitespace','');
 fclose(fid);
 dataFileNames = C{1};
-%% Step 0.2: Variables and Prepocessing
+% Step 1b: Variables
 nWorkers = 4; % for parallel computations
 nLabels = size(labels, 1);
 nFiles = size(dataFileNames, 1);
@@ -28,7 +29,7 @@ nSegments = 0;
 
 htkFilepath =  'data/htkfiles/';
 addpath(htkFilepath);
-%% Step 1: Feature Extraction
+%% Step 2: Feature Extraction
 %{
 for i=1:nFiles
     [audioIn, fs, segments] = read_audio_file(audioFileNames{i}, dataFileNames{i});
@@ -40,13 +41,13 @@ for i=1:nFiles
 end
 %}
 
-%% Step 2: UBM Model from Training Data
+%% Step 3: UBM Model from Training Data
 nmix        = 1024;
 final_niter = 15;
 ds_factor   = 1;
 ubm = gmm_em(labels(1:nLabels,1), nmix, final_niter, ds_factor, nWorkers);
 
-%% Step 3: Total Variability Calculations
+%% Step 4: Total Variability Calculations
 stats = cell(nLabels, 1);
 for i=1:nLabels
     [N,F] = compute_bw_stats(append(htkFilepath, labels{i, 1}), ubm);
@@ -57,14 +58,14 @@ tvDim = 300;
 niter = 5;
 T = train_tv_space(stats, ubm, tvDim, niter, nWorkers);
 
-%% Step 4: IVector Feature Extraction
+%% Step 5: IVector Feature Extraction
 % Obtain development IVectors
 devIVs = zeros(tvDim, nLabels);
 for i=1:nLabels
     devIVs(:, i) = extract_ivector(stats{i}, ubm, T);
 end
 
-%% Step 5: Perform LDA on IVectors
+%% Step 6: Perform LDA on IVectors
 ldaDim = min(100, 5);
 [V,D] = lda(devIVs, string(labels(1:nLabels,2)));
 finalDevIVs = (V(:, 1:ldaDim)' * devIVs).*10^7;
