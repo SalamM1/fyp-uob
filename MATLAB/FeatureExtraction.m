@@ -22,7 +22,7 @@ C = textscan(fid,'%s','Delimiter','\t','Whitespace','');
 fclose(fid);
 dataFileNames = C{1};
 % Step 1b: Variables
-nWorkers = 4; % for parallel computations
+nWorkers = 12; % for parallel computations
 nLabels = size(labels, 1);
 nFiles = size(dataFileNames, 1);
 nSegments = 0;
@@ -30,16 +30,18 @@ nSegments = 0;
 htkFilepath =  'data/htkfiles/';
 addpath(htkFilepath);
 %% Step 2: Feature Extraction
+
 %{
 for i=1:nFiles
     [audioIn, fs, segments] = read_audio_file(audioFileNames{i}, dataFileNames{i});
     nSegments = size(segments, 1);
     for j=1:nSegments
-        feature = (extract_mfcc(audioIn(:,stereoDim(i)), fs, segments(j,:), 0.04, 0.02))';
+        feature = (extract_mfcc(audioIn(:,stereoDim(i)), fs, segments(j,:), 0.045, 0.02))';
         htkwrite(append(htkFilepath, dataFileNames{i}, num2str(j, '%03d')), feature, fs, 9);
     end
 end
 %}
+
 
 %% Step 3: UBM Model from Training Data
 nmix        = 1024;
@@ -54,8 +56,8 @@ for i=1:nLabels
     stats{i} = [N;F];
 end
 
-tvDim = 300;
-niter = 5;
+tvDim = 350;
+niter = 6;
 T = train_tv_space(stats, ubm, tvDim, niter, nWorkers);
 
 %% Step 5: IVector Feature Extraction

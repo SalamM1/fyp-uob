@@ -33,7 +33,7 @@ if startTime >= endTime
 end
 %for now compress stereo audio into mono?
 if size(audioIn, 2)==2
-    audioIn = mean(audioIn, 2);
+    audioIn = audioIn(:,1);
 end
 % convert ms to usable matlab format
 window_length = fix(window_length * fs);

@@ -1,6 +1,7 @@
-clear
 %% Step 1: Variables and Prepocessing
 colorMap = ['r', 'b', 'g', 'c', 'y', 'm'];
+letterMap = ['A', 'J', 'M', 'E', 'N', 'O'];
+
 load('data/ivectors.mat');
 load('data/labels.mat');
 nLabels = size(labels, 1);
@@ -38,12 +39,12 @@ for i = 1:nDim
         end
         subplot(nDim, nDim, nDim*(i-1) + j);
         hold on
-        %scatter(lab4(j,1:nMaxData), lab4(i,1:nMaxData), size, colorMap(5));
+        scatter(lab4(j,1:nMaxData), lab4(i,1:nMaxData), pointSize, colorMap(5));
         scatter(lab0(j,:), lab0(i,:), pointSize, colorMap(1));
         scatter(lab1(j,:), lab1(i,:), pointSize, colorMap(2));
         scatter(lab2(j,:), lab2(i,:), pointSize, colorMap(3));
         scatter(lab3(j,:), lab3(i,:), pointSize, colorMap(4));
-        scatter(lab4(j,1:nMaxData), lab4(i,1:nMaxData), pointSize, colorMap(5));
+        %scatter(lab4(j,1:nMaxData), lab4(i,1:nMaxData), pointSize, colorMap(5));
         scatter(lab5(j,:), lab5(i,:), pointSize, colorMap(6));
     end
 end
