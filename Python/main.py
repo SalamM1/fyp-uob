@@ -9,6 +9,7 @@ from keras.utils import to_categorical
 
 
 def main():
+    model_name = "test1"
     idx = np.arange(5000)  # indices for all data points in x
     np.random.shuffle(idx)
 
@@ -31,6 +32,11 @@ def main():
     model.fit(x_data_train, y_data_train, epochs=50, batch_size=100)
     y_pred = model.predict_classes(x_data_test)
     model.summary()
+    print(eval.f1score(y_data_test, y_pred, w))
+
+    model_json = model.to_json()
+    with open("model.json", "w") as json_file:
+        json_file.write(model_json)
 
 
 if __name__ == '__main__':
@@ -47,4 +53,3 @@ if __name__ == '__main__':
     # test_pred = model.predict_classes(x_data_test)
     # print("")
     main()
-    pass
