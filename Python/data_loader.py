@@ -1,5 +1,4 @@
 import numpy as np
-import torch
 
 
 def load_data_file(filename):
