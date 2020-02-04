@@ -1,0 +1,31 @@
+project structure:
+
+Title Page
+Abstract
+ToC [Topics]
+ToC [Figures and Tables, if space allows]
+
+Introduction: [expand on things talked about in proposal]
+Background info on topic
+Why are we here
+
+Main Body::
+Literature Review
+Methods - MFCCs
+Methods - IVectors
+Methods - Neural Network
+Methods - Optimizations and Evaluations of Neural Network
+Results - Neat tables and stuff
+Results - Discussion and what it all means
+Results - Interesting stuff I couldnt put anywhere else
+
+Conclusion [Mirror intro, but more conclusively]
+References (Extract from Zotero its super easy, do it last, check to make sure it works first)
+----------------
+Appendices:
+Code detail used for certain tasks
+Details regarding the dataset used (eg transcript used, microphone differences)
+
+--------------------------------------------
+Plan -> 7 weeks until submission, draft 5 weeks in
+Literature Review (1), Methods (2), Results (2), Introduction(0.5), Conclusion(0.5), Abstract(1)

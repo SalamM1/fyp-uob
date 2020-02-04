@@ -1,6 +1,6 @@
 letterMap = ['A', 'J', 'M', 'E', 'N', 'O'];
 
-load('data/ivectors.mat');
+% load('data/ivectors.mat');
 load('data/labels.mat');
 
 labels = labels(:,2);
@@ -11,5 +11,5 @@ test = labels{2};
 for i = 1:size(labels, 1)
    labelVals(i) = strfind(letterMap, labels{i}) - 1; 
 end
-testList = [finalDevIVs', labelVals];
-writematrix(testList, 'data')
+testList = normalize(devIVs');
+writematrix(testList, 'features_100')

@@ -56,7 +56,7 @@ for i=1:nLabels
     stats{i} = [N;F];
 end
 
-tvDim = 350;
+tvDim = 100;
 niter = 6;
 T = train_tv_space(stats, ubm, tvDim, niter, nWorkers);
 
