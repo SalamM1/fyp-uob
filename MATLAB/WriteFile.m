@@ -11,5 +11,5 @@ test = labels{2};
 for i = 1:size(labels, 1)
    labelVals(i) = strfind(letterMap, labels{i}) - 1; 
 end
-testList = normalize(devIVs');
+testList = normalize(finalDevIVs');
 writematrix(testList, 'features_100')
