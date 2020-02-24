@@ -1,4 +1,4 @@
-function feature_vector = extract_mfcc(audioIn, fs, segment, window_length, overlap_length)
+function feature_vector = extract_mfcc(audioIn, fs, segment, window_length, overlap_length, fs_scale)
 %EXTRACT_MFCC Extracts the mfcc feature vector from given audio
 %   Inputs: filepath, window_length, overlap_length
 %
@@ -31,6 +31,9 @@ end
 if startTime >= endTime
     error('The segment needs to start before it ends.');
 end
+if fs_scale <= 0
+    error('Scaling cannot be zero or lower.')
+end
 %for now compress stereo audio into mono?
 if size(audioIn, 2)==2
     audioIn = audioIn(:,1);
@@ -48,6 +51,6 @@ ft = stft(audioIn, 'Window', win, 'OverlapLength', overlap_length, 'Centered', f
 
 %% Get feature vector from mfcc function
 % Extract the 40-dimensional MFCC vector
-[mfccs, delta, deltaDelta, loc] = mfcc(ft, fs, "LogEnergy", "Ignore");
+[mfccs, delta, deltaDelta, loc] = mfcc(ft, fs * fs_scale, "LogEnergy", "Ignore");
 feature_vector = [mfccs, delta, deltaDelta, loc];
 end

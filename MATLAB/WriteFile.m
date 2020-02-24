@@ -12,4 +12,4 @@ for i = 1:size(labels, 1)
    labelVals(i) = strfind(letterMap, labels{i}) - 1; 
 end
 testList = normalize(finalDevIVs');
-writematrix(testList, 'features_100')
+writematrix(labelVals, 'labels_augmented')

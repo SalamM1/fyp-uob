@@ -18,6 +18,8 @@ labels(:,1) = C{1}(:,1);
 acc_label = '';
 idx = [];
 
+fs_scales = [0.8, 0.9, 1, 1.1, 1.2];
+
 for i=1:nLabels
     if i ~= nLabels
         if strcmp(labels(i+1,1), labels{i, 1}) %if the group ID is the same, find most frequent from all choices
@@ -26,12 +28,27 @@ for i=1:nLabels
         end 
     end
     raw_label = append(acc_label, C{3}(i),C{4}(i),C{5}(i));
-    labels{i,2} = get_label(raw_label, map_in, map_out, map_val);
+    labels{i,2} = get_label(raw_label, map_in, map_out);
     idx = [idx i];
     acc_label = '';
 end
 
 labels = labels(idx, :);
+nLabels = size(labels, 1);
+
+labels_total = cell(nLabels*5, 2);
+for i=1:nLabels
+    labels_total{i,1} = labels{i, 1};
+    labels_total{i,1} = labels{i, 1};
+    labels_total{i,1} = labels{i, 1};
+    labels_total{i,1} = labels{i, 1};
+    labels_total{i,1} = labels{i, 1};
+    for j=1:5
+        labels_total{i + ((j - 1)*nLabels), 1} = append(labels{i,1}, '_', num2str(fs_scales(j)));
+        labels_total{i + ((j - 1)*nLabels), 2} = labels{i,2};
+    end
+end
+labels = labels_total;
 
 function c_out = get_label(c_in, map_in, map_out)
 %GET_LABEL Finds most frequent char in an array of mapped chars

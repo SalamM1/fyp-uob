@@ -31,17 +31,19 @@ htkFilepath =  'data/htkfiles/';
 addpath(htkFilepath);
 %% Step 2: Feature Extraction
 
+fs_scales = [0.8, 0.9, 1, 1.1, 1.2];
 %{
-for i=1:nFiles
-    [audioIn, fs, segments] = read_audio_file(audioFileNames{i}, dataFileNames{i});
-    nSegments = size(segments, 1);
-    for j=1:nSegments
-        feature = (extract_mfcc(audioIn(:,stereoDim(i)), fs, segments(j,:), 0.045, 0.02))';
-        htkwrite(append(htkFilepath, dataFileNames{i}, num2str(j, '%03d')), feature, fs, 9);
+for k=fs_scales
+    for i=1:nFiles
+        [audioIn, fs, segments] = read_audio_file(audioFileNames{i}, dataFileNames{i});
+        nSegments = size(segments, 1);
+        for j=1:nSegments
+            feature = (extract_mfcc(audioIn(:,stereoDim(i)), fs, segments(j,:), 0.045, 0.02, k))';
+            htkwrite(append(htkFilepath, dataFileNames{i}, num2str(j, '%03d'), '_', num2str(k)), feature, fs, 9);
+        end
     end
 end
 %}
-
 
 %% Step 3: UBM Model from Training Data
 nmix        = 1024;

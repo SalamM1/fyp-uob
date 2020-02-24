@@ -10,9 +10,10 @@ Background info on topic
 Why are we here
 
 Main Body::
-Literature Review
+Literature Review:
+	
 Methods - MFCCs
-Methods - IVectors
+Methods - GMM & IVectors
 Methods - Neural Network
 Methods - Optimizations and Evaluations of Neural Network
 Results - Neat tables and stuff

@@ -2,7 +2,7 @@
 colorMap = ['r', 'b', 'g', 'c', 'y', 'm'];
 letterMap = ['A', 'J', 'M', 'E', 'N', 'O'];
 
-load('data/ivectors.mat');
+%load('data/ivectors.mat');
 load('data/labels.mat');
 nLabels = size(labels, 1);
 nDim = size(finalDevIVs, 1);

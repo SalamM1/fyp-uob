@@ -5,6 +5,7 @@ import data_loader as loader
 import evaluator as eval
 import weighted_categorical_crossentropy as my_loss
 from keras.layers import Dense
+from keras.layers import Dropout
 from keras.models import Sequential
 from keras.utils import to_categorical
 
@@ -12,22 +13,27 @@ from keras.utils import to_categorical
 def main():
     # Variables
     hidden_layer_count = 1
-    layer_size = 10
+    layer_size = 80
+    dropout = 0.2
     activation = 'relu'
-    epoch_count = 30
-    batch_size = 30
-    optimizer = 'adam'
+    epoch_count = 100
+    batch_size = 500
+    optimizer = 'sgd'
     learning_rate = 0.006
     verbose = 0
     summary = False
     trials = 5
 
-    data_file = "features_100_lda.txt"
+    data_file = "features_augmented.txt"
+    label_file = "labels_augmented.txt"
     train_test_split = 0.8
     validation_split = 0.15
 
     # Constants and Calculated Values
     n_labels = 5302
+    n_label_scaling = 1
+    n_labels = n_labels * n_label_scaling
+
     n_train = int(n_labels * train_test_split)
     n_test = int(n_labels * (1-train_test_split))
 
@@ -38,7 +44,7 @@ def main():
         x_data = loader.load_data_file("data/" + data_file)
         x_data_train = x_data[idx[:n_train]]
         x_data_test = x_data[idx[n_train:(n_train + n_test)]]
-        y_data = loader.load_data_file("data/labels.txt")
+        y_data = loader.load_data_file("data/" + label_file)
         y_data_train = to_categorical(y_data[idx[:n_train]])
         y_data_test = y_data[idx[n_train:(n_train + n_test)]]
         w = eval.get_weights(y_data, 6)
@@ -52,6 +58,7 @@ def main():
 
         model.add(Dense(layer_size, input_dim=x_data.shape[1], activation=activation))
         for i in range(max(hidden_layer_count, 0)):
+            model.add(Dropout(dropout))
             model.add(Dense(layer_size, activation=activation))
         model.add(Dense(6, activation='softmax'))
 

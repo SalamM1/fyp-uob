@@ -1,15 +1,16 @@
-\documentclass[12pt, a4paper, oneside, titlepage]{report}
+\documentclass[12pt, a4paper, titlepage]{report}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage{graphicx}
 \usepackage{subfiles}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{graphicx}
 \usepackage{float}
-\usepackage[headsep=0mm]{geometry}
+\usepackage[headheight=0pt, margin=1in, top=0.5in]{geometry}
 \usepackage{enumitem}
 \usepackage{hyperref}
+
+\setlength{\headsep}{0pt}
 
 \hypersetup{
 	colorlinks=true,
@@ -18,18 +19,12 @@
 	urlcolor=cyan,
 }
 \setlength{\parindent}{0pt}
-\setlength{\headsep}{0pt}
 \setlength{\parskip}{0pt}
 \setlength{\intextsep}{12pt}
 \setlist{nolistsep}
 \setitemize{itemsep=2pt}
-\geometry{
-	a4paper,
-	total={170mm,257mm},
-	left=20mm,
-	top=10mm,
-}
 \graphicspath{{images/}{../images/}}
+
 
 \begin{document}
 		\begin{titlepage}
@@ -68,4 +63,19 @@
 \newpage
 \pagenumbering{arabic}
 
+	\chapter{Introduction}
+	\subfile{chapters/intro}
+	\chapter{Literature Review}
+	\subfile{chapters/litref}
+	\chapter{Methods}
+	\subfile{chapters/methods}
+	\chapter{Results}
+	\subfile{chapters/results}
+	\chapter{Conclusion}
+	\subfile{chapters/conc}
+	\chapter{Bibliography}
+	\subfile{chapters/bib}	
+	\chapter{Appendix}
+	\subfile{chapters/apx}
+	
 \end{document}
