@@ -2,7 +2,7 @@
 colorMap = ['r', 'b', 'g', 'c', 'y', 'm'];
 letterMap = ['A', 'J', 'M', 'E', 'N', 'O'];
 
-%load('data/ivectors.mat');
+load('data/ivectors.mat');
 load('data/labels.mat');
 nLabels = size(labels, 1);
 nDim = size(finalDevIVs, 1);
@@ -14,7 +14,7 @@ lab3 = [];
 lab4 = [];
 lab5 = [];
 %% Step 2: Sort the data into different arrays with respect to their label
-for i = 1:nLabels
+for i = 1:5302
     if strcmp(labels{i, 2}, 'A')
         lab0 = [lab0 finalDevIVs(:, i)];
     elseif strcmp(labels{i, 2}, 'J')
@@ -31,7 +31,7 @@ for i = 1:nLabels
 end
 
 %% Step 3: Commit an NxN 2D scatter plot set for visualization
-pointSize = 1; %size of point on plot
+pointSize = 2; %size of point on plot
 for i = 1:nDim
     for j = 1:nDim
         if i == j
@@ -48,5 +48,5 @@ for i = 1:nDim
         scatter(lab5(j,:), lab5(i,:), pointSize, colorMap(6));
     end
 end
-
 hold off
+legend('Neutral', 'Angry', 'Joyful', 'Motherese', 'Emphatic', 'Other')

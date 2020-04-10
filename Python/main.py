@@ -14,18 +14,18 @@ def main():
     # Variables
     hidden_layer_count = 1
     layer_size = 80
-    dropout = 0.2
+    dropout = 0.1
     activation = 'relu'
-    epoch_count = 100
-    batch_size = 500
+    epoch_count = 10
+    batch_size = 50
     optimizer = 'sgd'
     learning_rate = 0.006
     verbose = 0
     summary = False
     trials = 5
 
-    data_file = "features_augmented.txt"
-    label_file = "labels_augmented.txt"
+    data_file = "features_100_lda.txt"
+    label_file = "labels.txt"
     train_test_split = 0.8
     validation_split = 0.15
 

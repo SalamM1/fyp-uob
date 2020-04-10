@@ -1,4 +1,5 @@
-\documentclass[12pt, a4paper, titlepage]{report}
+\documentclass[11pt, a4paper, notitlepage]{report}
+\RequirePackage{fix-cm}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage{graphicx}
@@ -6,29 +7,34 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{float}
-\usepackage[headheight=0pt, margin=1in, top=0.5in]{geometry}
+\usepackage[headheight=0pt, top=2.75cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
 \usepackage{enumitem}
 \usepackage{hyperref}
+\usepackage{indentfirst}
+\usepackage{titlesec}
 
 \setlength{\headsep}{0pt}
-
+\titlespacing*{\chapter}{0pt}{0pt}{0pt}
 \hypersetup{
 	colorlinks=true,
 	linkcolor=black,
 	filecolor=magenta,      
 	urlcolor=cyan,
 }
-\setlength{\parindent}{0pt}
+%\setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt}
 \setlength{\intextsep}{12pt}
 \setlist{nolistsep}
 \setitemize{itemsep=2pt}
 \graphicspath{{images/}{../images/}}
-
+\setcounter{tocdepth}{1}
+\renewcommand{\baselinestretch}{1.25}
+\widowpenalty10000
+\clubpenalty10000
 
 \begin{document}
 		\begin{titlepage}
-		\pagenumbering{gobble}
+		\pagenumbering{arabic}
 		\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
 		
 		\center % Center everything on the page
@@ -37,21 +43,29 @@
 		%	HEADING SECTIONS
 		%----------------------------------------------------------------------------------------
 		
-		\textsc{\LARGE University of Birmingham}\\[1.5cm] % Name of your university/college
+		\textsc{\LARGE University of Birmingham}\\[0cm] % Name of your university/college
 		\textsc{\Large School of Computer Science}\\[0.5cm] % Major heading such as course name
-		\textsc{\Large Faisal IMH Alrajhi}\\[0.5cm]
+		\includegraphics[scale=0.25]{logo.png}\\[0cm]
+		\textsc{\Large BSc Computer Science 2019/20 - Final Year Project}\\[0.5cm]
+		\textsc{\Large Faisal IMH Alrajhi}\\[0cm]
+		\textsc{\Large ID: 1593979} \\[0.5cm]
+		\textsc{\Large Supervisor: Prof. Martin Russell}
 		
 		%----------------------------------------------------------------------------------------
 		%	TITLE SECTION
 		%----------------------------------------------------------------------------------------
 
 		\HRule \\[0.4cm]
-		{ \huge \bfseries BSc FYP - Emotion Classification in Children's Speech}\\[0.4cm] % Title of your document
+		{ \huge \bfseries Automatic Emotion Recognition in Children's Speech}\\[0.2cm] % Title of your document
 		\HRule \\[1.5cm]
 
 		
-		\includegraphics[scale=0.75]{logo.png}\\[1cm] % Include a department/university logo - this will require the graphicx package
+		%\includegraphics[scale=0.75]{logo.png}\\[1cm] % Include a department/university logo - this will require the graphicx package
 		
+		\begin{abstract}
+			\normalsize
+			I honestly have no idea what I am doing help
+		\end{abstract}
 		%----------------------------------------------------------------------------------------
 		
 		\vfill % Fill the rest of the page with whitespace
@@ -61,21 +75,21 @@
 \newpage
 \tableofcontents
 \newpage
-\pagenumbering{arabic}
-
+	
+	%\fontsize{10.5pt}{13.5pt}\selectfont
 	\chapter{Introduction}
 	\subfile{chapters/intro}
 	\chapter{Literature Review}
 	\subfile{chapters/litref}
-	\chapter{Methods}
+	\chapter{Design and Implementation}
 	\subfile{chapters/methods}
-	\chapter{Results}
+	\chapter{Results and Evaluation}
 	\subfile{chapters/results}
 	\chapter{Conclusion}
 	\subfile{chapters/conc}
 	\chapter{Bibliography}
-	\subfile{chapters/bib}	
-	\chapter{Appendix}
+	\subfile{chapters/bib}
+	\appendix
 	\subfile{chapters/apx}
 	
 \end{document}

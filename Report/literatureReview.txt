@@ -8,12 +8,15 @@ What is Emotion?
 		https://www.sciencedirect.com/science/article/abs/pii/S0376635702000785
 	Classifying:
 		http://www.theemotionmachine.com/classification-of-emotions/
+		https://www.tandfonline.com/doi/pdf/10.1080/02699930441000481?needAccess=true&instName=University+of+Birmingham
+		https://journals.sagepub.com/doi/10.1177/053901882021004003
 		https://www.pnas.org/content/early/2017/08/30/1702247114 
 		https://ppw.kuleuven.be/cscp/documents/mesquita/mesquita-walker-2003-cultural-differences-in.pdf
 %--------------------%
 Emotion Recognition
 --> Why we want to do it:
 		https://www.researchgate.net/publication/287867911_Emotion_Recognition_and_Its_Applications
+		https://ict.usc.edu/pubs/Human%20Emotional%20State%20and%20its%20Relevance%20for%20Military%20VR%20Training.pdf
 --> How do we do it:
 		Text:
 			https://link.springer.com/chapter/10.1007/978-981-13-7166-0_42
@@ -38,23 +41,33 @@ Speech Technologies
 Data Collection
 --> Multi language
 		https://www.isca-speech.org/archive/Interspeech_2019/pdfs/2034.pdf
+		https://www.pnas.org/content/early/2017/08/30/1702247114.abstract
 --> Corpora for Emotion Speech and how its collected
 		https://www.aclweb.org/anthology/L04-1172/ [Aibo]
 		http://www.thespeechark.com/pf-star-page.html [PF Star]
+		https://www.researchgate.net/publication/221491189_The_PF_STAR_children's_speech_corpus [Actual PF Star]
 		https://www.sciencedirect.com/science/article/pii/S0885230817301547 [WoZ]
 %--------------------%
 Feature Selection
 		https://www.sciencedirect.com/science/article/abs/pii/S0031320310004619
 --> Paralinguistic Features VS lexical
 		https://ieeexplore.ieee.org/abstract/document/7178872
+		https://psycnet.apa.org/record/1985-22244-001
 		https://ieeexplore.ieee.org/abstract/document/8635059
+		https://arxiv.org/pdf/1811.01222.pdf
 --> Data Augmentation
 		https://pdfs.semanticscholar.org/3de0/616eb3cd4554fdf9fd65c9c82f2605a17413.pdf
 --> MFCCs + others (not used so only going to gloss over them)
 		https://www.intechopen.com/books/from-natural-to-artificial-intelligence-algorithms-and-applications/some-commonly-used-speech-feature-extraction-algorithms
-		
---> I Vector approach
+		https://www.semanticscholar.org/paper/Application-of-MFCC-in-Text-Independent-Speaker-Gupta/2aa9c2971342e8b0b1a0714938f39c406f258477
+		https://link.springer.com/article/10.1007/s10772-020-09689-9
+--> I Vector approach / Supervectors
 		https://ieeexplore.ieee.org/document/8081264
+		https://www.researchgate.net/publication/222682226_An_Overview_of_Text-Independent_Speaker_Recognition_from_Features_to_Supervectors
+		https://ieeexplore.ieee.org/abstract/document/4218125
+		https://ieeexplore.ieee.org/document/1162961
+		https://www.researchgate.net/publication/239765787_iVector-based_discriminative_adaptation_for_automatic_speech_recognition
+		https://www.sciencedirect.com/science/article/pii/S1877050918314042
 %--------------------%
 Classification
 --> SVMs + Others

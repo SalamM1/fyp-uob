@@ -28,6 +28,9 @@ for i=1:nLabels
         end 
     end
     raw_label = append(acc_label, C{3}(i),C{4}(i),C{5}(i));
+    if (has_dupe(raw_label, map_in, map_out) == 1)
+        continue
+    end
     labels{i,2} = get_label(raw_label, map_in, map_out);
     idx = [idx i];
     acc_label = '';
@@ -35,21 +38,35 @@ end
 
 labels = labels(idx, :);
 nLabels = size(labels, 1);
-
-labels_total = cell(nLabels*5, 2);
+%{ data augmentation labels lazy way
+labels_total = cell(nLabels*1, 2);
 for i=1:nLabels
     labels_total{i,1} = labels{i, 1};
     labels_total{i,1} = labels{i, 1};
     labels_total{i,1} = labels{i, 1};
     labels_total{i,1} = labels{i, 1};
     labels_total{i,1} = labels{i, 1};
-    for j=1:5
+    for j=1:1
         labels_total{i + ((j - 1)*nLabels), 1} = append(labels{i,1}, '_', num2str(fs_scales(j)));
         labels_total{i + ((j - 1)*nLabels), 2} = labels{i,2};
     end
 end
 labels = labels_total;
-
+%}
+function c_dupe = has_dupe(c_in, map_in, map_out)
+%HAS_DUPE determines if the label is equal across all three labelers.
+for i=1:strlength(c_in)
+   c_in(i) = map_out(map_in == c_in(i)); 
+end
+c_dupe = 0;
+c_temp = c_in(1);
+for i=1:strlength(c_in)
+    if c_in(i) ~= c_temp
+        c_dupe = 1;
+    end
+end
+end
+        
 function c_out = get_label(c_in, map_in, map_out)
 %GET_LABEL Finds most frequent char in an array of mapped chars
 for i=1:strlength(c_in)
