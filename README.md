@@ -2,6 +2,10 @@
 # Emotion Classification from Speech Data
 
 This is the repository of Faisal I M H Alrajhi, a student in the University of Birmingham's School of Computer Science. The files relating to the BSc. Final Year Project (40 credits) are all in this repository.
+
+*NOTE:* In the interest of both file size and ethics, the audio files are not uploaded with the MATLAB code. 
+However, PlotLDA and ClassifyLDA should still work as intended. The MATLAB should be well documented.*
+
 ## Project Summary
 Emotion recognition from speech is important with tasks involving Human-Machine interaction, such as with automated voice systems Amazon Alexa and Google Home. The main issues in this field are related to the search for highly discriminate features and appropriate features and classification methods. In this project, I am to:
 
@@ -15,8 +19,15 @@ If time is available, the additional objectives of optimising the classifier and
 ## Programming
 The programming languages that will be used in the project are MATLAB and Python, with some reliance on libraries and add-ons.
 ### MATLAB
-MATLAB will be used for signal processing and feature extraction [WIP]
+ * PlotLDA - loads labels and ivectors and plots the 5x5 LDA image found in the report.
+ * ClassifyLDA - Baseline classifiers of nearest neighbor with cosine similarity and euclidean distance.
+ * FeatureExtraction - mains script to convert audio files into
+ * GetLabelsAsArray - converts the labelled segments into 5302x2 file of ID and label.
+ * WriteFile - writes the features/labels to csv files used in Python
+ * read_audio_file - function to read file
+ * extract_mfcc - function to do MFCC extraction
+ 
 ### Python
-Python will be used for the DNN classifier [WIP]
-
-[updated as project is being worked on, however this readme is not the highest priority]
+Required Libraries
+ * Keras
+ * Matplotlib

@@ -43,7 +43,7 @@
 		\item Take the Discrete Fourier Transform (DFT)  of the signal to convert it into the frequency domain. This is done using the \verb|stft(...)| function in MATLAB's Signal Processing library.
 		\item Apply 26 triangular filter banks to the DFT output as seen in Figure \ref{fig:filterbanks}. The triangular filters match the non-linear human perception by covering a smaller area in smaller frequencies and vice versa. The log is taken of the energy in each filter.
 					\begin{figure}[!htb]
-			\center{\includegraphics[width=9cm]
+			\center{\includegraphics[width=7cm]
 				{filterbanks}}
 			\caption{\label{fig:filterbanks} Mel Filterbanks applied to a power spectrum of a signal}
 		\end{figure}
@@ -68,7 +68,7 @@
 	I Vectors can be dimensionally reduced further using Linear Discriminant Analysis (LDA). LDA projects data onto a lower-dimensional vector space such that the ratio of the between-class distance to the within-class distance is maximized. The dimension of LDA reduced data is $n-1$, where $n$ is the number of distinct classes in the data. Six emotion classes are used in this project, so the final sized feature vector is 5 dimensions in size obtained by reducing the I Vectors with the LDA function provided by the MSR Identity Toolkit.  
 	
 	\begin{figure}[!htb]
-		\center{\includegraphics[width=7cm]
+		\center{\includegraphics[width=6cm]
 			{3dlda}}
 		\caption{\label{fig:3dlda} First 3 dimensions of 5D LDA reduced I Vectors}
 	\end{figure}

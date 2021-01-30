@@ -7,11 +7,13 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{float}
-\usepackage[headheight=0pt, top=2.75cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage[headheight=0pt, top=3cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
 \usepackage{enumitem}
 \usepackage{hyperref}
 \usepackage{indentfirst}
 \usepackage{titlesec}
+\usepackage{blindtext}
+\usepackage{etoolbox}
 
 \setlength{\headsep}{0pt}
 \titlespacing*{\chapter}{0pt}{0pt}{0pt}
@@ -31,6 +33,22 @@
 \renewcommand{\baselinestretch}{1.25}
 \widowpenalty10000
 \clubpenalty10000
+\makeatletter
+\renewcommand*\@makechapterhead[1]{%
+	%       \vspace*{50\p@}%
+	{%
+		\parindent\z@\raggedright\normalfont
+		%           \ifnum\c@secnumdepth>\m@ne
+		%               \huge\bfseries\@chapapp\space\thechapter\par
+		%               \nobreak\vskip 20\p@
+		%           \fi
+		%           \interlinepenalty\@M
+		\Huge\bfseries
+		#1\par
+		\nobreak\vskip 40\p@
+	}
+}
+\makeatother
 
 \begin{document}
 		\begin{titlepage}
@@ -57,14 +75,16 @@
 
 		\HRule \\[0.4cm]
 		{ \huge \bfseries Automatic Emotion Recognition in Children's Speech}\\[0.2cm] % Title of your document
-		\HRule \\[1.5cm]
+		\HRule \\[1.0cm]
 
 		
 		%\includegraphics[scale=0.75]{logo.png}\\[1cm] % Include a department/university logo - this will require the graphicx package
 		
 		\begin{abstract}
 			\normalsize
-			I honestly have no idea what I am doing help
+			Emotion recognition has numerous uses in human computer interaction systems, medical practices, military training and more. One resource to automatically recognize emotions from is acoustic speech data. A major issue in emotion recognition is the search for highly discriminate features appropriate for classification. This paper explores the use of state of the art I Vector feature vectors and deep neural network classifiers in automatic recognition of children’s speech. A system was built using the PF Star Children’s Speech corpus for emotion speech in English with six emotional classes; angry, joyful, motherese, emphatic, neutral and other. Applying Linear Discriminant Analysis on I Vectors and using these low dimensional I Vectors in a deep neural network exhibited performance upwards of 82\% unweighted average recall. This is an improvement on the 69\% originally reported by the PF Star dataset in German. Interestingly, longer than average MFCC frames (40ms+) improved performance and evidence suggests that using a scale-based definition for emotion could exhibit increased performance over the distinct equivalence classes used in this project. Data augmentation, cross lingual testing and hybrid classifier models have not been experimented with and are the ideal next step onwards from this project.
+			
+			Keywords: emotion recognition, speech processing, ivectors, deep neural network
 		\end{abstract}
 		%----------------------------------------------------------------------------------------
 		
@@ -75,7 +95,6 @@
 \newpage
 \tableofcontents
 \newpage
-	
 	%\fontsize{10.5pt}{13.5pt}\selectfont
 	\chapter{Introduction}
 	\subfile{chapters/intro}

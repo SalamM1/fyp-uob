@@ -1,6 +1,16 @@
 \section{Reviewing Objectives}
-	
+		The primary objective of this project was to build a system to automatically recognize emotions expressed in children's speech using acoustic speech data using the latest state of the art techniques of I Vectors and neural networks. This project achieved this by:
+	\begin{enumerate}
+		\item Providing a review of current techniques and the reasons they are used over older techniques.
+		\item Breaking down the data used substantially to allow consideration for any abnormal situations or labels.
+		\item Used modern I Vector and neural networks techniques and provided evidence to the improvement in accuracy they provide over other techniques.
+		\item Evaluated results and proposed areas to continue from this project, such as using a scale definition of emotion over a discrete definition.
+	\end{enumerate}
 \section{Findings and Contributions}
-\subsection{Feature Extraction}
+	Emotion recognition is not at the level of speech recognition in popularity, usage and research, but with recent advancements it is improving rapidly. Some findings in this project could contribute to the field of emotion recognition.
 	
+	A larger than normal MFCC frame size of 40ms exhibited improved performance, which can be considered unusual. Most speech processing techniques deal with either recognition or identification/verification, so experimenting with alternate framze sizes or cepstral coefficients can present new state of the art emotion recognition techniques.
+	
+	Neural Network performance is more effective with LDA reduced features of a small size than hand picked features of a large size. Using an alternate discriminator to process features before classifying with a neural network is not limited to emotion recognition; this behavior can be true for various machine learning problems.
 \section{Further Steps}
+	Alternative approaches can be taken to accommodate for class imbalance. Data augmentation using frequency normalization to increase the sample size of classes besides Neutral could prove effective. Alternative neural network architecture, such as hybrid builds, will provide more results to use in understanding effective classification techniques. The dataset provides both English and German speech data of the same type, so using the methods from this project to see results on cross-lingual training and predicting can advance on the issue of cross lingual and cultural emotion recognition.
